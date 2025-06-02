@@ -1,0 +1,194 @@
+{
+  "name": "matecode",
+  "displayName": "MateCode",
+  "description": "Apply code blocks from LLM chatbot responses to your workspace files",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "publisher": "vscode-extensions",
+  "icon": "images/icon.png",
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "matecode.applyCodeBlocks",
+        "title": "MateCode: Apply Copied Code Blocks"
+      },
+      {
+        "command": "matecode.applyCodeBlocksToOpenFile",
+        "title": "MateCode: Apply Code Blocks to Open File"
+      },
+      {
+        "command": "matecode.revertLastApply",
+        "title": "MateCode: Revert Last Applied Change"
+      },
+      {
+        "command": "matecode.clearHistory",
+        "title": "MateCode: Clear History"
+      },
+      {
+        "command": "matecode.refreshHistory",
+        "title": "MateCode: Refresh History View"
+      },
+      {
+        "command": "matecode.restoreFromHistory",
+        "title": "MateCode: Restore From History"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "matecodeHistory",
+          "name": "MateCode History"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "matecodeHistory",
+        "contents": "No code application history found.\nApply code blocks to see history here."
+      }
+    ],
+    "configuration": {
+      "title": "MateCode",
+      "properties": {
+        "matecode.defaultSaveFolder": {
+          "type": "string",
+          "default": "",
+          "description": "Default folder path to save new files (relative to workspace root)"
+        },
+        "matecode.enableDiffPreview": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable diff preview before applying changes"
+        },
+        "matecode.enableOneClickUndo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable one-click undo functionality"
+        },
+        "matecode.enableAutoFormat": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable auto-formatting after applying code blocks"
+        },
+        "matecode.enableSidebarHistory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the history view in sidebar"
+        },
+        "matecode.maxHistoryItems": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of history items to store"
+        },
+        "matecode.backupLocation": {
+          "type": "string",
+          "default": "~/.matecode/backup",
+          "description": "Location to store backup files"
+        }
+      }
+    },
+    
+    "keybindings": [
+      {
+        "command": "matecode.applyCodeBlocks",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus || editorHasSelection || !editorFocus"
+      },
+      {
+        "command": "matecode.applyCodeBlocksToOpenFile",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus || editorHasSelection || !editorFocus"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "matecode.applyCodeBlocks",
+          "when": "view == llmChatView",
+          "group": "navigation"
+        },
+        {
+          "command": "matecode.applyCodeBlocksToOpenFile",
+          "when": "view == llmChatView",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "MateCode",
+      "properties": {
+        "matecode.defaultSaveFolder": {
+          "type": "string",
+          "default": "",
+          "description": "Default folder path to save new files (relative to workspace root)"
+        },
+        "matecode.applyToOpenFilesKeybinding": {
+          "type": "string",
+          "default": "ctrl+shift+d",
+          "description": "Keybinding for applying code blocks to open files"
+        },
+        "matecode.applyCodeBlocksKeybinding": {
+          "type": "string",
+          "default": "ctrl+shift+a",
+          "description": "Keybinding for applying code blocks to workspace"
+        },
+        "matecode.enableDiffPreview": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show diff preview before applying code blocks"
+        },
+        "matecode.enableOneClickUndo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable one-click undo with file snapshots"
+        },
+        "matecode.enableAutoFormat": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically run formatters after applying code blocks"
+        },
+        "matecode.enableSidebarHistory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show history of applied code blocks in sidebar"
+        },
+        "matecode.backupLocation": {
+          "type": "string",
+          "default": "~/.matecode/backup",
+          "description": "Location to store backup files for one-click undo"
+        },
+        "matecode.maxHistoryItems": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of history items to keep"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "eslint": "^8.18.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4",
+    "@vscode/test-electron": "^2.1.5"
+  }
+}

@@ -1,0 +1,24 @@
++----------------------------------------------------------------------------------------------------------+
+|   VS Code - Workspace                                                                       □ ■ ×        |
+|                                                                                                          |
+|  ├ 📁 EXPLORER                                                                                           |
+|  │  ├── 📄 index.html                                                                                    |
+|  │  ├── 📄 styles.css                                                                                    |
+|  │  └── 📄 app.js                                                                                        |
+|  │                                                                                                       |
+|  ├─────────────────────────────────────────────────────────────────────────────────────────              |
+|  │                                                                                                       |
+|  │  📄 index.html  |  📄 styles.css  |  📄 app.js ×                                                      |
+|  │                                                                                                       |
+|  │  document.addEventListener('DOMContentLoaded', () => {                                                |
+|  │      const taskInput = document.getElementById('task-input');                                         |
+|  │      const addButton = document.getElementById('add-button');                                         |
+|  │      const taskList = document.getElementById('task-list');                                           |
+|  │                                                                                                       |
+|  │      // Load tasks from local storage                                                                |
+|  │      loadTasks();                                                                                    |
+|  │                                                                                                       |
+|  │      // Add task event                                                                               |
+|  │      addButton.addEventListener('click', addTask);                                                   |
+|  │      ...                                                                                              |
++----------------------------------------------------------------------------------------------------------+

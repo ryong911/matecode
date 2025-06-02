@@ -1,0 +1,23 @@
++----------------------------------------------------------------------------------------------------------+
+|                                                                                                          |
+|  ChatGPT                                                                       New Chat          Share   |
+|                                                                                                          |
+|  User: Can you create a simple Todo List app with HTML, CSS and JavaScript?                              |
+|                                                                                                          |
+|  ChatGPT:                                                                                                |
+|  Here's the implementation of the to-do list application you requested:                                  |
+|                                                                                                          |
+|  ## HTML Structure (index.html)                                                                          |
+|                                                                                                          |
+|  index.html                                                                                              |
+|  ```html                                                                                                 |
+|  <!DOCTYPE html>                                                                                         |
+|  <html lang="en">                                                                                        |
+|  <head>                                                                                                  |
+|      <meta charset="UTF-8">                                                                              |
+|      <meta name="viewport" content="width=device-width, initial-scale=1.0">                             |
+|      <title>Simple Todo App</title>                                                                      |
+|      <link rel="stylesheet" href="styles.css">                                                           |
+|  </head>                                                                                                 |
+|  ...                                                                                                     |
++----------------------------------------------------------------------------------------------------------+
