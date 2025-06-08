@@ -1,6 +1,23 @@
 {
-  "timeline_index": 9,
-  "planner": {},
+  "timeline_index": 16,
+  "planner": {
+    "Team Leader": {
+      "1": {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "Create Korean documentation (README_KR.md) for the MateCode VS Code extension based on the current documentation.",
+        "task_type": "general",
+        "code": "",
+        "result": "",
+        "is_success": false,
+        "is_finished": true,
+        "assignee": "Alex",
+        "start_at": 1749381229.8621862,
+        "end_at": 1749381376.1708739
+      },
+      "current_task_id": "1"
+    }
+  },
   "gallery_last_file": {},
   "timeline_status": {
     "2": 1,
@@ -10,7 +27,13 @@
     "6": 1,
     "7": 1,
     "8": 1,
-    "9": 1
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "13": 1,
+    "14": 1,
+    "15": 1,
+    "16": 1
   },
   "preview_servers": {},
   "deploy": {}
