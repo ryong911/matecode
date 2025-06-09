@@ -2,6 +2,18 @@
 
 LLM 챗봇 응답에서 코드 블록을 직접 작업 공간 파일에 적용하는 VS Code 확장 프로그램입니다.
 
+## 설치 방법
+
+### VSIX 패키지에서 설치
+
+1. 이 저장소를 복제하세요: `git clone https://github.com/ryong911/matecode.git`
+2. 디렉토리로 이동하세요: `cd matecode`
+3. 의존성을 설치하세요: `npm install`
+4. 확장 프로그램 패키징: `vsce package`
+5. 생성된 .vsix 파일을 VS Code에 설치하세요:
+   - 명령 팔레트에서: "Extensions: Install from VSIX" 실행 후 파일 선택
+   - 또는 명령줄에서: `code --install-extension matecode-0.1.0.vsix`
+
 ## 기능
 
 - **구성 가능한 기능 (신규!)**: 다양한 생산성 기능을 켜거나 끌 수 있습니다:

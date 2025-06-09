@@ -3,7 +3,7 @@
 .vscode-test/**
 out/**
 node_modules/**
-src/**
+# src/**  # Commented out to include the src directory
 .gitignore
 .yarnrc
 webpack.config.js

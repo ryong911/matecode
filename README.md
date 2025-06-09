@@ -2,6 +2,18 @@
 
 A VS Code extension for applying code blocks from LLM chatbot responses directly to your workspace files.
 
+## Installation
+
+### From VSIX Package
+
+1. Clone this repository: `git clone https://github.com/ryong911/matecode.git`
+2. Navigate to the directory: `cd matecode`
+3. Install dependencies: `npm install`
+4. Package the extension: `vsce package`
+5. Install the generated .vsix file in VS Code:
+   - From Command Palette: Run "Extensions: Install from VSIX" and select the file
+   - Or via command line: `code --install-extension matecode-0.1.0.vsix`
+
 ## Features
 
 - **Configurable Features (New!)**: Toggle on/off various productivity features:

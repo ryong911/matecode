@@ -3,6 +3,10 @@
   "displayName": "MateCode",
   "description": "Apply code blocks from LLM chatbot responses to your workspace files",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryong911/matecode.git"
+  },
   "engines": {
     "vscode": "^1.70.0"
   },

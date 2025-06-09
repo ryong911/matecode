@@ -1,157 +1,104 @@
-# Packaging and Publishing the Chat-Code Apply Extension
-
-This document provides step-by-step instructions on how to package and publish the Chat-Code Apply extension to the Visual Studio Code Marketplace.
+# Packaging and Installing MateCode Extension
 
 ## Prerequisites
 
-Before packaging and publishing, ensure you have:
+- Node.js and npm installed
+- vsce package manager (`npm install -g @vscode/vsce`)
 
-1. [Node.js](https://nodejs.org/) installed
-2. [Visual Studio Code](https://code.visualstudio.com/) installed
-3. [vsce](https://github.com/microsoft/vscode-vsce) installed globally:
+## Common Issues and Solutions
+
+### 1. Missing repository field
+
+If you encounter an error about a missing repository field, ensure your `package.json` contains:
+
+```json
+"repository": {
+  "type": "git",
+  "url": "https://github.com/ryong911/matecode.git"
+}
+```
+
+### 2. Source code excluded in .vscodeignore
+
+Check your `.vscodeignore` file to ensure the `src/` directory is not excluded. If you see `src/**` in the file, comment it out or remove it.
+
+```
+# Exclude development files
+.vscode/**
+.vscode-test/**
+out/**
+node_modules/**
+# src/**  # Make sure this line is commented out or removed
+.gitignore
+```
+
+## Packaging Steps
+
+1. Clone the repository:
    ```
-   npm install -g vsce
-   ```
-4. A [Microsoft Azure DevOps](https://dev.azure.com/) account for publishing
-5. A Personal Access Token (PAT) from Azure DevOps
-
-## Version Management
-
-1. Update the version in `package.json` following semantic versioning:
-   - MAJOR: breaking changes
-   - MINOR: new features, no breaking changes
-   - PATCH: bug fixes, no breaking changes
-
-2. Add release notes to the `CHANGELOG.md` file, describing the changes in the new version.
-
-## Testing Before Packaging
-
-1. Run the extension tests:
-   ```
-   npm test
+   git clone https://github.com/ryong911/matecode.git
    ```
 
-2. Manually test the extension by launching a debugging session (F5 in VS Code).
+2. Navigate to the project directory:
+   ```
+   cd matecode
+   ```
 
-3. Ensure all files mentioned in the `.vscodeignore` file are properly excluded.
+3. Install dependencies:
+   ```
+   npm install
+   ```
 
-## Packaging the Extension
-
-1. Generate a `.vsix` file:
+4. Package the extension:
    ```
    vsce package
    ```
+   This will generate a `.vsix` file in the root directory.
 
-2. The command will create a file named `chat-code-apply-x.y.z.vsix` where `x.y.z` is the version number from your `package.json`.
+## Installation Methods
 
-3. Test the packaged extension by installing it manually in VS Code:
-   - Open VS Code
-   - Go to Extensions view
-   - Click the "..." menu in the top-right
-   - Select "Install from VSIX..."
-   - Choose the generated `.vsix` file
+### Method 1: Using VS Code GUI
 
-## Publishing to VS Code Marketplace
+1. Open VS Code
+2. Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P on Mac)
+3. Type "Extensions: Install from VSIX" and press Enter
+4. Browse to and select the generated `.vsix` file
 
-### First Time Setup
+### Method 2: Using Command Line
 
-1. Create a publisher on the [VS Code Marketplace](https://marketplace.visualstudio.com/VSCode):
-   - Sign in with your Azure DevOps account
-   - Create a publisher if you don't have one
-
-2. Create a Personal Access Token (PAT) in Azure DevOps:
-   - Go to your Azure DevOps profile settings
-   - Select "Personal Access Tokens"
-   - Create a new token with "Marketplace (publish)" scope
-   - Save this token securely
-
-3. Log in to vsce with your publisher ID and PAT:
-   ```
-   vsce login <your-publisher-id>
-   ```
-
-### Publishing
-
-1. Publish your extension:
-   ```
-   vsce publish
-   ```
-
-2. For minor/patch updates, you can also use:
-   ```
-   vsce publish minor
-   ```
-   or
-   ```
-   vsce publish patch
-   ```
-
-3. Verify your extension appears on the [VS Code Marketplace](https://marketplace.visualstudio.com/VSCode)
-
-## Updating the Extension
-
-1. Make your changes to the codebase
-2. Update version in `package.json`
-3. Update `CHANGELOG.md`
-4. Package and test locally
-5. Publish the update using `vsce publish`
-
-## Unpublishing
-
-If needed, you can unpublish a specific version or the entire extension:
-
-1. Unpublish a specific version:
-   ```
-   vsce unpublish <publisher>.<extension>@<version>
-   ```
-
-2. Unpublish the entire extension:
-   ```
-   vsce unpublish <publisher>.<extension>
-   ```
-
-## Automating Releases with GitHub Actions
-
-Consider setting up a GitHub Actions workflow to automate the release process:
-
-1. Create a `.github/workflows/publish.yml` file in your repository
-2. Set up a workflow that runs tests and publishes the extension on release tags
-3. Store your PAT as a GitHub secret
-
-Example workflow file:
-```yaml
-name: Publish Extension
-
-on:
-  release:
-    types: [created]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - run: npm ci
-      - name: Publish to VS Code Marketplace
-        run: npx vsce publish -p ${{ secrets.VSCE_PAT }}
+```
+code --install-extension matecode-0.1.0.vsix
 ```
 
-## Resources
+### Method 3: Drag and Drop
 
-- [VS Code Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
-- [vsce CLI Documentation](https://github.com/microsoft/vscode-vsce)
-- [VS Code Extension Marketplace](https://marketplace.visualstudio.com/vscode)
+Drag the `.vsix` file and drop it onto the VS Code window.
+
+## Troubleshooting
+
+### Error: Cannot find extension.js
+
+Ensure your `package.json` has the correct `main` field pointing to your entry point:
+
+```json
+"main": "./src/extension.js",
+```
+
+And make sure the `.vscodeignore` file is not excluding your source code.
+
+### Error: Cannot run package command
+
+If you encounter errors with the `vsce` command:
+
+1. Make sure it's installed globally: `npm install -g @vscode/vsce`
+2. Try with latest version: `npm uninstall -g vsce && npm install -g @vscode/vsce`
+
+### Missing Publisher
+
+Ensure your `package.json` has a `publisher` field:
+
+```json
+"publisher": "your-publisher-name",
+```
+
+For personal use/testing, you can use any name as the publisher.
